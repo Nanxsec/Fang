@@ -1,6 +1,6 @@
 # Fang
 
-Crawler paralelo que vasculha um site inteiro e fisga só as URLs com parâmetros que importam.
+Crawler paralelo que vasculha um site inteiro e pega só as URLs com parâmetros que importam.
 
 Fang percorre um domínio de forma recursiva, seguindo todos os links que encontra, usa `sitemap.xml` para acelerar a descoberta, respeita `robots.txt` (incluindo `Crawl-delay`), e no final filtra o resultado para entregar apenas URLs de conteúdo real — sem lixo de CSS, JS, fontes ou assets de CDN.
 
@@ -14,9 +14,6 @@ Sites grandes escondem parâmetros de URL em milhares de páginas (`?id=`, `?map
 - Descoberta via `sitemap.xml`, incluindo sitemap index aninhado
 - Respeita `robots.txt`, incluindo a diretiva `Crawl-delay`
 - Filtro automático de arquivos estáticos e CDNs de assets (CSS, JS, fontes, imagens, build systems)
-- Deduplicação inteligente: agrupa URLs com o mesmo padrão de parâmetro (`?id=1`, `?id=2`, `?id=3`...) e mostra uma amostra em vez de centenas de linhas repetidas
-- Salva progresso parcial se o processo for interrompido com `Ctrl+C`
-- Gera dois arquivos de saída: uma amostra deduplicada e a lista completa
 
 ## Requisitos
 
@@ -85,10 +82,9 @@ python3 fang.py cisco.com --quiet
 
 ## Saída
 
-Ao final da execução, Fang gera dois arquivos:
+Ao final da execução, Fang gera o arquivo:
 
 - **`urls_com_parametros.txt`** — amostra deduplicada, pronta para leitura e análise rápida
-- **`urls_com_parametros_completo.txt`** — lista completa, sem nenhuma URL descartada
 
 Além disso, o terminal mostra um resumo com os padrões de parâmetro mais frequentes encontrados no site:
 
@@ -110,9 +106,6 @@ Principais padrões encontrados (caminho + parâmetros -> quantidade):
 7. Links aprovados voltam para a fila e o processo se repete até não haver mais páginas novas ou o limite `--max-pages` ser atingido
 8. No final, o conjunto de URLs coletadas é filtrado para manter apenas as que possuem parâmetros na query string, agrupadas por padrão e salvas em disco
 
-## Interrompendo a execução
-
-É seguro apertar `Ctrl+C` a qualquer momento. Fang finaliza as threads em andamento e salva o progresso já coletado até aquele ponto, avisando que o resultado é parcial.
 
 ## Aviso
 
