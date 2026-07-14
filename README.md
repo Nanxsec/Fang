@@ -118,6 +118,3 @@ Principais padrões encontrados (caminho + parâmetros -> quantidade):
 
 Fang faz requisições reais ao site informado. Use apenas em domínios que você tem autorização para varrer. Respeite os limites definidos pelo próprio site em seu `robots.txt` e ajuste `--workers` e `--timeout` para não sobrecarregar o servidor de terceiros.
 
-## Licença
-
-Defina a licença do seu projeto aqui (MIT, Apache 2.0, etc).
